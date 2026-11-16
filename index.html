@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OKO ENERGY — Énergie naturelle, zéro bullshit</title>
+<meta name="description" content="OKO ENERGY — boisson énergisante à la caféine naturelle, moins de sucre et arômes naturels. Démo web 3D.">
+<meta name="theme-color" content="#050607">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23050607%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 font-family=%22Arial Black,Arial%22 font-style=%22italic%22 font-weight=%22900%22 font-size=%2230%22 fill=%22%23fff%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EOKO%3C/text%3E%3C/svg%3E">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>
+</head>
+<body class="is-loading">
+
+<!-- Preloader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-logo"><span>OKO</span><span>ENERGY</span></div>
+  <div class="loader-bar"><i id="loaderBar"></i></div>
+  <div class="loader-pct mono" id="loaderPct">000</div>
+</div>
+
+<!-- Fixed background layer (under the 3D canvas) -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-l bg-hero" id="bgHero"></div>
+  <div class="bg-l bg-orange" id="bgOrange"><div class="orange-glow" id="orangeGlow"></div></div>
+  <div class="zero" id="zero"><span>ZERO</span><span>BULLSHIT</span></div>
+  <div class="bg-l bg-orange-flash" id="bgFlash"></div>
+  <div class="bg-l bg-dark" id="bgDark"><div class="sweep" id="sweep"></div></div>
+</div>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<!-- HUD / header -->
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+<header class="hdr">
+  <button class="snd mono" id="snd" aria-pressed="false" aria-label="Activer le son"><b>SON</b><span class="eq"><i></i><i></i><i></i><i></i></span><em id="sndState">OFF</em></button>
+  <a href="#top" class="logo" aria-label="OKO ENERGY — accueil"><span>OKO</span><span>ENERGY</span></a>
+  <div class="hdr-r">
+    <span class="lang mono">FR</span>
+    <button class="menu-btn mono" id="menuBtn" aria-expanded="false" aria-controls="menu"><span class="burger"><i></i><i></i></span><b>MENU</b></button>
+    <a class="cart-btn mono" href="#boutique">PANIER <b id="cartCount">0</b></a>
+  </div>
+</header>
+<div class="edge edge-l" aria-hidden="true"><i>+</i><span></span><span></span><span></span><i>+</i></div>
+<div class="edge edge-r" aria-hidden="true"><i>⌄</i><i>⌄</i><span></span><span></span><i>⌄</i></div>
+
+<nav class="menu" id="menu" aria-hidden="true">
+  <ol>
+    <li><a href="#top"><small class="mono">01</small>Accueil</a></li>
+    <li><a href="#saveur"><small class="mono">02</small>Pêche blanche</a></li>
+    <li><a href="#gamme"><small class="mono">03</small>La gamme</a></li>
+    <li><a href="#faq"><small class="mono">04</small>FAQ</a></li>
+    <li><a href="#boutique"><small class="mono">05</small>Boutique</a></li>
+  </ol>
+  <p class="mono">Énergie naturelle — zéro bullshit</p>
+</nav>
+
+<main id="top">
+
+  <!-- HERO: ring of cans -->
+  <section class="sec hero" id="hero" data-stage="hero">
+    <div class="hero-kicker mono"><span id="heroIdx">01</span> / 04 — LA COLLECTION</div>
+    <div class="hero-label" id="heroLabel">
+      <small id="heroPre">GOÛT</small>
+      <strong id="heroName">CITRON VERT</strong>
+    </div>
+    <div class="scroll-hint mono" aria-hidden="true"><span>SCROLL</span><i></i></div>
+  </section>
+
+  <!-- STORY: big can + features + zero bullshit -->
+  <section class="sec story" id="saveur" data-stage="story">
+    <div class="feats" id="feats">
+      <article class="feat is-on">
+        <p class="feat-n mono">01 — LA SAVEUR</p>
+        <h2>PÊCHE<br>BLANCHE</h2>
+        <p>Un moment de douceur pétillante. Une boisson énergisante florale, délicatement parfumée à la pêche blanche de vallée.</p>
+      </article>
+      <article class="feat">
+        <p class="feat-n mono">02 — LA FORMULE</p>
+        <h2>MOINS<br>DE SUCRE</h2>
+        <p>Seulement 1,2 g de sucre par canette. Tout le goût, sans le pic de glycémie ni l’arrière-goût d’édulcorant.</p>
+      </article>
+      <article class="feat">
+        <p class="feat-n mono">03 — LES ARÔMES</p>
+        <h2>ARÔMES<br>NATURELS</h2>
+        <p>Des fruits, des plantes, et c’est tout. Aucun arôme artificiel, aucun colorant, rien qu’on ne sache pas prononcer.</p>
+      </article>
+      <article class="feat">
+        <p class="feat-n mono">04 — L’ÉNERGIE</p>
+        <h2>CAFÉINE<br>NATURELLE</h2>
+        <p>Issue de grains de café verts. Une énergie qui monte en douceur et qui redescend sans crash.</p>
+      </article>
+    </div>
+    <ul class="feat-nav" id="featNav" aria-hidden="true">
+      <li class="is-on"><svg viewBox="0 0 24 24"><path d="M12 3c4 3 6 6 6 9a6 6 0 0 1-12 0c0-3 2-6 6-9z"/></svg></li>
+      <li><svg viewBox="0 0 24 24"><path d="M7 4h10l-1 16H8z"/><path d="M8 9h8"/></svg></li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14z"/><path d="M5 19l8-8"/></svg></li>
+      <li><svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="5" ry="8"/><path d="M12 4c-2 5 2 11 0 16"/></svg></li>
+    </ul>
+    <div class="feat-count mono" aria-hidden="true"><span id="featIdx">01</span><i></i>04</div>
+  </section>
+
+  <!-- LINEUP -->
+  <section class="sec lineup" id="gamme" data-stage="lineup">
+    <div class="lineup-head">
+      <p class="mono">LA GAMME — 14 SAVEURS</p>
+      <h2 id="lineupName">CITRON VERT</h2>
+    </div>
+    <div class="lineup-foot mono"><span id="lineupIdx">01</span> / 14<i class="lineup-track"><b id="lineupBar"></b></i></div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec faq" id="faq">
+    <h2 class="faq-title" aria-label="Foire aux questions"><span data-t="FOIRE AUX">FOIRE AUX</span><span data-t="QUESTIONS">QUESTIONS</span></h2>
+    <div class="acc" id="acc">
+      <details>
+        <summary>Qu’est-ce qui distingue Oko Energy des autres boissons énergisantes ?<i></i></summary>
+        <div class="acc-b"><p>Trois choses : une caféine 100 % naturelle issue de grains de café verts, 1,2 g de sucre par canette et uniquement des arômes naturels. Pas de taurine de synthèse, pas de colorants, pas de promesse impossible.</p></div>
+      </details>
+      <details>
+        <summary>Oko Energy est-elle une boisson pétillante ?<i></i></summary>
+        <div class="acc-b"><p>Oui, légèrement. On a choisi une bulle fine, plus proche d’une eau gazeuse que d’un soda, pour garder la fraîcheur sans ballonner.</p></div>
+      </details>
+      <details>
+        <summary>Quelle est la teneur en sucre et en calories d’Oko Energy ?<i></i></summary>
+        <div class="acc-b"><p>Une canette de 250 ml contient 1,2 g de sucre et 9 kcal. La douceur vient des fruits et d’une touche de stévia.</p></div>
+      </details>
+      <details>
+        <summary>Quelles sont les vitamines présentes dans Oko Energy ?<i></i></summary>
+        <div class="acc-b"><p>Des vitamines B3, B5, B6 et B12, qui contribuent à réduire la fatigue, ainsi qu’un peu de vitamine C apportée par les fruits.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="sec shop" id="boutique" data-stage="shop">
+    <div class="shop-info">
+      <p class="mono">BOUTIQUE — PACK</p>
+      <h2 id="shopName">PÊCHE<br>BLANCHE</h2>
+      <p class="shop-sub">Canettes de 250 ml · 80 mg de caféine naturelle · 9 kcal</p>
+      <div class="swatches" id="swatches" role="radiogroup" aria-label="Choisir une saveur"></div>
+    </div>
+    <div class="shop-buy">
+      <div class="qty mono">
+        <button class="glass" id="qMinus" aria-label="Moins">[ − ]</button>
+        <span>BOÎTES (<b id="qty">12</b>)</span>
+        <button class="glass" id="qPlus" aria-label="Plus">[ + ]</button>
+      </div>
+      <div class="price" id="price">19.90€</div>
+      <button class="glass add mono" id="addBtn">AJOUTER AU PANIER</button>
+      <p class="ship mono">Livraison offerte dès 24 boîtes</p>
+    </div>
+    <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+  </section>
+
+  <footer class="foot" id="contact">
+    <div class="foot-news">
+      <h2>REJOIGNEZ-NOUS</h2>
+      <p>Les nouvelles saveurs, les drops limités et les événements Oko, avant tout le monde.</p>
+      <form class="news" onsubmit="event.preventDefault();this.classList.add('ok');this.querySelector('input').value='';">
+        <input type="email" required placeholder="VOTRE ADRESSE MAIL" aria-label="Votre adresse mail">
+        <button class="glass mono">S’INSCRIRE</button>
+        <span class="news-ok mono">Merci ! À très vite.</span>
+      </form>
+    </div>
+    <div class="foot-row mono">
+      <div class="foot-logo"><span>OKO</span><span>ENERGY</span></div>
+      <nav><a href="#saveur">Saveurs</a><a href="#gamme">La gamme</a><a href="#faq">FAQ</a><a href="#boutique">Boutique</a></nav>
+      <nav><a href="#contact">Instagram</a><a href="#contact">TikTok</a><a href="#contact">Mentions légales</a><a href="#contact">CGV</a></nav>
+    </div>
+    <p class="foot-note mono">Démo conceptuelle — marque fictive. Design &amp; développement : Jose Khalili Blas · 2026</p>
+  </footer>
+</main>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script type="module" src="assets/main.js"></script>
+</body>
+</html>
