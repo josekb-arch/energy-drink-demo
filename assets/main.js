@@ -529,8 +529,8 @@ function buildShop() {
     const mob = camera.aspect < .9;
     camera.fov = mob ? 44 : 32;
     camera.position.set(mouse.sx * .3, -mouse.sy * .15, mob ? 16 : 13.6); camera.lookAt(0, 0, 0);
-    root.position.y = mob ? -.45 : 0;
-    root.scale.setScalar(mob ? 1.1 : 1);
+    root.position.y = mob ? .05 : 0;
+    root.scale.setScalar(mob ? 1 : 1);
     clipTop.constant = (RY - .19) * root.scale.y + root.position.y; clipBot.constant = (RY - .19) * root.scale.y - root.position.y;
     holder.rotation.set(.04, 0, -.06 + Math.sin(t * .7) * .04);
     shopCan.group.rotation.y = reduced ? .2 : t * .45;
@@ -655,7 +655,7 @@ function initUI(lenis) {
   // reveals
   gsap.from('.faq-title span', { scrollTrigger: { trigger: '.faq', start: 'top 70%' }, x: -80, opacity: 0, duration: 1.1, stagger: .12, ease: 'power4.out' });
   gsap.from('#acc details', { scrollTrigger: { trigger: '#acc', start: 'top 85%' }, y: 30, opacity: 0, duration: .8, stagger: .08, ease: 'power3.out' });
-  gsap.from('.shop-info > *, .shop-buy > *', { scrollTrigger: { trigger: '.shop', start: 'top 60%' }, y: 30, opacity: 0, duration: .8, stagger: .06, ease: 'power3.out' });
+  gsap.from('.shop-info > *, .shop-buy > *', { scrollTrigger: { trigger: '.shop', start: 'top 60%' }, y: 30, opacity: 0, duration: .8, stagger: .06, ease: 'power3.out', clearProps: 'transform' });
   gsap.from('.foot-news > *', { scrollTrigger: { trigger: '.foot', start: 'top 75%' }, y: 30, opacity: 0, duration: .9, stagger: .08, ease: 'power3.out' });
 }
 
